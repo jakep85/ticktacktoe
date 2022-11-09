@@ -10,6 +10,8 @@ const TILE_LISTEN_REMOVE = 'TILE_LISTEN_REMOVE';
 const TILE_LISTEN_ADD = 'TILE_LISTEN_ADD';
 const MOVE_PLAYER = 'X';
 const MOVE_COMPUTER = 'O';
+const WIN_PLAYER = 'XXX';
+const WIN_COMPUTER = 'OOO';
 const COMPUTER = 'Computer';
 const PLAYER = 'Player';
 const GAME_DRAW = 'Draw';
@@ -87,7 +89,20 @@ const updateScoreCard = (obj, tileSelection, choiceType) => {
 };
 
 // Pass in who won, set all text and stuff
-const gameEnd = (winner, winCombo = null) => {
+const gameEnd = (winningScore, winCombo = null) => {
+  let winner = null;
+
+  if (winningScore === playerScore) {
+    winner = PLAYER;
+  } else if (winningScore === computerScore) {
+    winner = COMPUTER;
+  } else {
+    winner = GAME_DRAW;
+  }
+
+  // Tiernary
+  // winningScore === playerScore ? (winner = PLAYER) : (winner = COMPUTER);
+
   updateTileListeners(tilesArray, TILE_LISTEN_REMOVE);
   gameStatus = GAME_STATUS_ENDED;
   winnerEl.textContent = 'Winner';
@@ -119,35 +134,52 @@ const gameEnd = (winner, winCombo = null) => {
 };
 
 // TODO: make more dry
-const checkForWinner = (who) => {
-  let obj = {};
-  let whoMark = null;
+const checkForWinner = (obj) => {
+  // Old way
 
-  if (who === PLAYER) {
-    obj = playerScore;
-    whoMark = MOVE_PLAYER;
-  } else if (who === COMPUTER) {
-    obj = computerScore;
-    whoMark = MOVE_COMPUTER;
-  }
+  // let obj = {};
+  // let whoMark = null;
+
+  // if (who === PLAYER) {
+  //   obj = playerScore;
+  //   whoMark = MOVE_PLAYER;
+  // } else if (who === COMPUTER) {
+  //   obj = computerScore;
+  //   whoMark = MOVE_COMPUTER;
+  // }
 
   for (const combo in obj) {
-    let winCount = 0;
+    // For old way
+    // let winCount = 0;
     const arr = obj[combo];
 
-    for (const item of arr) {
-      if (item === whoMark) {
-        winCount++;
-      }
-    }
+    // Using join() way
+    // console.log(`check winner arr: ${arr}`);
+    const joinedArr = arr.join('');
+    // console.log(`check winner arr joined: ${joinedArr}`);
 
-    if (winCount === 3) {
-      gameEnd(who, combo);
+    if (joinedArr === WIN_PLAYER || joinedArr === WIN_COMPUTER) {
+      gameEnd(obj, combo);
       break;
-    } else if (gameBoardArray.length === 0 && winCount !== 3) {
+    } else if (gameBoardArray.length === 0 && isNaN(joinedArr)) {
       gameEnd(GAME_DRAW);
       break;
     }
+
+    // Previous way
+    // for (const item of arr) {
+    //   if (item === whoMark) {
+    //     winCount++;
+    //   }
+    // }
+
+    // if (winCount === 3) {
+    //   gameEnd(who, combo);
+    //   break;
+    // } else if (gameBoardArray.length === 0 && winCount !== 3) {
+    //   gameEnd(GAME_DRAW);
+    //   break;
+    // }
   }
 
   // for (const combo in playerObj) {
@@ -317,7 +349,7 @@ const addPlayerChoice = (selectedTile) => {
   updateGameBoard(selectedTileID);
   updateScoreCard(playerScore, +selectedTileID, MOVE_PLAYER);
   // console.log(playerScore, computerScore);
-  checkForWinner(PLAYER);
+  checkForWinner(playerScore);
   if (gameStatus !== GAME_STATUS_ENDED) {
     changeTurn(COMPUTER);
   }
@@ -394,7 +426,7 @@ const addComputerChoice = () => {
       updateGameBoard(computerChoice);
       updateScoreCard(computerScore, computerChoice, MOVE_COMPUTER);
       // console.log(playerScore, computerScore);
-      checkForWinner(COMPUTER);
+      checkForWinner(computerScore);
       if (gameStatus !== GAME_STATUS_ENDED) {
         changeTurn(PLAYER);
       }
@@ -446,11 +478,14 @@ const resetGame = () => {
   gameStatus = GAME_STATUS_ENDED;
   updateTileListeners(TILE_LISTEN_REMOVE);
   resetTileText();
-  document.getElementById(lastWinCombo).style.opacity = '0';
+  if (lastWinCombo) {
+    document.getElementById(lastWinCombo).style.opacity = '0';
+  }
   gameStatusEl.classList.remove('text-green-700');
   gameStatusEl.classList.add('text-orange-700');
   whoWonEl.classList.remove('text-red-700');
   whoWonEl.classList.remove('text-green-700');
+  whoWonEl.classList.remove('text-orange-700');
   console.log('game was reset');
   gameStatusEl.textContent = GAME_STATUS_ENDED;
   winnerEl.textContent = '';
