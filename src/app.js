@@ -97,9 +97,9 @@ const gameEnd = (winner, winCombo = null) => {
   gameStatusEl.classList.add('text-orange-700');
   activeTurn = GAME_TURN_NA;
   currentTurnEl.textContent = GAME_TURN_NA;
-  console.log(
-    `here is the activeTurn: ${activeTurn} and the currentTurnEl.textContent: ${currentTurnEl.textContent}`
-  );
+  // console.log(
+  //   `here is the activeTurn: ${activeTurn} and the currentTurnEl.textContent: ${currentTurnEl.textContent}`
+  // );
 
   if (winner === PLAYER) {
     console.log(`${winner} won with the combo: ${winCombo}`);
@@ -296,11 +296,11 @@ const changeTurn = (cTurn) => {
 
 const updateGameBoard = (markedTile) => {
   const index = gameBoardArray.indexOf(parseInt(markedTile));
-  console.log('game board array before: ', gameBoardArray);
+  // console.log('game board array before: ', gameBoardArray);
   gameBoardArray.splice(index, 1);
-  console.log('marked tile: ', markedTile);
-  console.log('index: ', index);
-  console.log('game board array after: ', gameBoardArray);
+  // console.log('marked tile: ', markedTile);
+  // console.log('index: ', index);
+  // console.log('game board array after: ', gameBoardArray);
 };
 
 const addPlayerChoice = (selectedTile) => {
@@ -316,14 +316,12 @@ const addPlayerChoice = (selectedTile) => {
   console.log(`tile with id of: ${selectedTileID} an ${MOVE_PLAYER} was added`);
   updateGameBoard(selectedTileID);
   updateScoreCard(playerScore, +selectedTileID, MOVE_PLAYER);
-  console.log(playerScore, computerScore);
+  // console.log(playerScore, computerScore);
   checkForWinner(PLAYER);
   if (gameStatus !== GAME_STATUS_ENDED) {
     changeTurn(COMPUTER);
   }
 };
-
-let counterTest = 0;
 
 const addComputerChoice = () => {
   if (gameStatus === GAME_STATUS_ENDED) {
@@ -345,34 +343,32 @@ const addComputerChoice = () => {
 
   // Check game board if choice is already marked, if marked generate another random choice
   while (gameBoardArray.length > 0) {
-    console.log('computer choice: ', computerChoice);
+    // console.log('computer choice: ', computerChoice);
     let foundIt = gameBoardArray.indexOf(computerChoice);
     if (foundIt !== -1) {
       // remove computer choice to array board
-      console.log('valid choice exists on board. Removing tile... ');
-      console.log('game board array: ', gameBoardArray);
+      // console.log('valid choice exists on board. Removing tile... ');
+      // console.log('game board array: ', gameBoardArray);
       const selectedTile = document.getElementById(computerChoice);
       selectedTile.textContent = MOVE_COMPUTER;
       updateGameBoard(computerChoice);
       updateScoreCard(computerScore, computerChoice, MOVE_COMPUTER);
-      console.log(playerScore, computerScore);
+      // console.log(playerScore, computerScore);
       checkForWinner(COMPUTER);
       if (gameStatus !== GAME_STATUS_ENDED) {
         changeTurn(PLAYER);
       }
-      counterTest++;
-      console.log('countertest: ', counterTest);
       break;
     } else {
       // guess again
-      console.log(
-        'computer chose already removed tile from gameboard. Guessing again...'
-      );
+      // console.log(
+      //   'computer chose already removed tile from gameboard. Guessing again...'
+      // );
       computerChoice = getRandomComputerChoice(1, 9);
-      console.log('game board array: ', gameBoardArray);
-      console.log('game board array length: ', gameBoardArray.length);
-      console.log('game status: ', gameStatus);
-      console.log('found it: ', foundIt);
+      // console.log('game board array: ', gameBoardArray);
+      // console.log('game board array length: ', gameBoardArray.length);
+      // console.log('game status: ', gameStatus);
+      // console.log('found it: ', foundIt);
     }
   }
 };
