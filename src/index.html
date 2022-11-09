@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="/src/app.js" defer></script>
+  </head>
+  <body>
+    <div
+      class="flex justify-center flex-col w-1/2 mx-auto border-3 border-black"
+    >
+      <h1 class="text-3xl font-bold text-center mt-10 mb-5">Tic Tac Toe!</h1>
+      <div class="flex justify-center">
+        <button
+          id="startGameBtn"
+          class="text-lg py-4 px-6 mb-10 bg-sky-600 text-white rounded-xl bold hover:bg-sky-900"
+        >
+          Start Game
+        </button>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="relative w-[600px] h-[600px]">
+          <div class="absolute w-full h-full pointer-events-none">
+            <div
+              id="vLeft"
+              class="absolute top-1/2 -translate-y-1/2 left-[calc(16.5%-8px)] h-[95%] w-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="vMiddle"
+              class="absolute top-1/2 -translate-y-1/2 left-[calc(50%-8px)] h-[95%] w-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="vRight"
+              class="absolute top-1/2 -translate-y-1/2 left-[calc(83.5%-8px)] h-[95%] w-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="hTop"
+              class="absolute left-1/2 -translate-x-1/2 top-[calc(16.5%-8px)] w-[95%] h-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="hMiddle"
+              class="absolute left-1/2 -translate-x-1/2 top-[calc(50%-8px)] w-[95%] h-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="hBottom"
+              class="absolute left-1/2 -translate-x-1/2 top-[calc(83.5%-8px)] w-[95%] h-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="diagOne"
+              class="absolute left-1/2 rotate-45 -translate-x-1/2 top-[calc(50%-8px)] w-[95%] h-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+            <div
+              id="diagTwo"
+              class="absolute left-1/2 -rotate-45 -translate-x-1/2 top-[calc(50%-8px)] w-[95%] h-8 shadow-md shadow-blue-600 bg-blue-600 rounded-full transition-all opacity-0"
+            ></div>
+          </div>
+          <div
+            id="board"
+            class="grid gap-4 grid-rows-3 grid-cols-3 b-3 border-black bg-gray-300 w-full h-full"
+          >
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="1"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="2"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="3"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="4"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="5"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="6"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="7"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="8"
+            ></div>
+            <div
+              class="bg-white border-1 border-black text-9xl flex justify-center items-center cursor-pointer hover:bg-slate-50 font-mono"
+              id="9"
+            ></div>
+          </div>
+        </div>
+        <div class="flex items-center flex-col">
+          <h2 class="text-3xl bold mt-10">
+            <span class="font-extrabold mr-4">Current turn:</span
+            ><span id="currentTurn"></span>
+          </h2>
+          <h3 class="text-xl mt-5">
+            Game status:
+            <span id="gameStatus" class="text-orange-700 font-extrabold"></span>
+          </h3>
+          <hr />
+          <h4 class="font-extrabold mt-5 text-center">
+            <span id="winnerText" class="text-5xl text-gray-700"></span>
+            <span id="winnerWho" class="text-9xl block italic"></span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
