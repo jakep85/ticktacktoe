@@ -339,29 +339,39 @@ const addComputerChoice = () => {
 
   // If user combo group has more than 2 marks, select random choice from those tiles to block user
   const computerCheckPlayerScore = () => {
-    for (const combos in playerScore) {
-      const arr = playerScore[combos];
-      console.log(
-        `comp checked player score and arrays are: ${arr} for combo: ${combos}`
-      );
+    let prefCombo = null;
+    for (const combo in playerScore) {
+      const arr = playerScore[combo];
+      console
+        .log
+        // `comp checked player score and arrays are: ${arr} for combo: ${combo}`
+        ();
 
+      let comboCount = 0;
       for (const arrVal of arr) {
-        console.log(`arrVal: ${arrVal} of arr: ${arr} with combo: ${combos}`);
-        // let comboCount = 0;
-        // if (arrVal === MOVE_PLAYER) {
-        //   comboCount++;
-        // }
+        // console.log(`arrVal: ${arrVal} of arr: ${arr} with combo: ${combo}`);
+        if (arrVal === MOVE_PLAYER) {
+          comboCount++;
+        }
 
-        // if (comboCount === 2) {
-        //   console.log(
-        //     `player has comb: ${combo} containing combocount of: ${comboCount}`
-        //   );
-        // }
+        if (comboCount === 2) {
+          console.log(
+            `*****WARNING****** player has comb: ${combo} containing combocount of: ${comboCount}`
+          );
+          console.log(
+            'arrVal index of with player move is: ',
+            arr.indexOf(MOVE_PLAYER)
+          );
+          prefCombo = combo;
+        }
+
+        console.log(`the combo count is: ${comboCount}`);
       }
     }
+    return prefCombo;
   };
 
-  computerCheckPlayerScore();
+  console.log('pref comp choice is: ', computerCheckPlayerScore());
 
   // Get random number
   const getRandomComputerChoice = (min, max) => {
