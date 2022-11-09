@@ -333,6 +333,36 @@ const addComputerChoice = () => {
   // If groups with 2 player marks > 1 make a random choice between those two
   // Else make a random choice
 
+  // Check player current score
+  console.log('computer checking user score...');
+  console.log(playerScore);
+
+  // If user combo group has more than 2 marks, select random choice from those tiles to block user
+  const computerCheckPlayerScore = () => {
+    for (const combos in playerScore) {
+      const arr = playerScore[combos];
+      console.log(
+        `comp checked player score and arrays are: ${arr} for combo: ${combos}`
+      );
+
+      for (const arrVal of arr) {
+        console.log(`arrVal: ${arrVal} of arr: ${arr} with combo: ${combos}`);
+        // let comboCount = 0;
+        // if (arrVal === MOVE_PLAYER) {
+        //   comboCount++;
+        // }
+
+        // if (comboCount === 2) {
+        //   console.log(
+        //     `player has comb: ${combo} containing combocount of: ${comboCount}`
+        //   );
+        // }
+      }
+    }
+  };
+
+  computerCheckPlayerScore();
+
   // Get random number
   const getRandomComputerChoice = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
