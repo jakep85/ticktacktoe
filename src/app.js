@@ -121,15 +121,21 @@ const gameEnd = (winningScore, winCombo = null) => {
     lastWinCombo = winCombo;
     document.getElementById(winCombo).style.opacity = '1';
     whoWonEl.classList.add('text-green-700');
+    winnerEl.parentElement.classList.remove('opacity-0');
+    winnerEl.parentElement.classList.add('opacity-90');
   } else if (winner === COMPUTER) {
     document.getElementById(winCombo).style.opacity = '1';
     console.log(`${winner} won with the combo: ${winCombo}`);
     lastWinCombo = winCombo;
     whoWonEl.classList.add('text-red-700');
+    winnerEl.parentElement.classList.remove('opacity-0');
+    winnerEl.parentElement.classList.add('opacity-90');
   } else if (winner === GAME_DRAW) {
     console.log(`Nobody won it was a draw`);
     winnerEl.textContent = 'No Winner';
     whoWonEl.classList.add('text-orange-700');
+    winnerEl.parentElement.classList.remove('opacity-0');
+    winnerEl.parentElement.classList.add('opacity-90');
   }
 };
 
@@ -490,6 +496,8 @@ const resetGame = () => {
   gameStatusEl.textContent = GAME_STATUS_ENDED;
   winnerEl.textContent = '';
   whoWonEl.textContent = '';
+  winnerEl.parentElement.classList.add('opacity-0');
+  winnerEl.parentElement.classList.remove('opacity-90');
 
   computerScore = {
     diagOne: [1, 5, 9],
