@@ -78,6 +78,8 @@ const addChoice = (arr, selectedTilePos, choiceType) => {
   const index = arr.indexOf(selectedTilePos);
   if (index !== -1) {
     arr.splice(index, 1, choiceType);
+    // Conan a shorter way
+    // arr[index] = choiceType;
   }
 };
 
@@ -158,6 +160,8 @@ const checkForWinner = (obj) => {
     // For old way
     // let winCount = 0;
     const arr = obj[combo];
+    console.log('Conan: ');
+    console.log(arr);
 
     // Using join() way
     // console.log(`check winner arr: ${arr}`);
@@ -448,6 +452,8 @@ const addComputerChoice = () => {
       // console.log('game status: ', gameStatus);
       // console.log('found it: ', foundIt);
     }
+    console.log('Conan2');
+    console.log(gameBoardArray);
   }
 };
 
